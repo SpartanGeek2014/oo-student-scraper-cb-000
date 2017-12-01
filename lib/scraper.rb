@@ -12,7 +12,8 @@ class Scraper
         student_name = student.css('.student-name').text
         students << {name: student_name, location: student_location, profile_url: student_profile_link}
       end
-      students
+    end
+    students
   end
 
   def self.scrape_profile_page(profile_slug)
@@ -29,8 +30,12 @@ class Scraper
       else
         student[:blog] = link
       end
-  end
-
+    end
+    # student[:twitter] = profile_page.css(".social-icon-container").children.css("a")[0].attribute("href").value
+    # # if profile_page.css(".social-icon-container").children.css("a")[0]
+    # student[:linkedin] = profile_page.css(".social-icon-container").children.css("a")[1].attribute("href").value if profile_page.css(".social-icon-container").children.css("a")[1]
+    # student[:github] = profile_page.css(".social-icon-container").children.css("a")[2].attribute("href").value if profile_page.css(".social-icon-container").children.css("a")[2]
+    # student[:blog] = profile_page.css(".social-icon-container").children.css("a")[3].attribute("href").value if profile_page.css(".social-icon-container").children.css("a")[3]
     student[:profile_quote] = profile_page.css(".profile-quote").text if profile_page.css(".profile-quote")
     student[:bio] = profile_page.css("div.bio-content.content-holder div.description-holder p").text if profile_page.css("div.bio-content.content-holder div.description-holder p")
 
